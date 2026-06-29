@@ -1,9 +1,8 @@
 #Because all IT workers are assholes, might as well emrbrace it ! 
-
 from random import choice
 
-def basic_generation(art, adj, con, act):
-    excuse  =   f"{choice(art)} {choice(adj)} {choice(con)} {choice(act)}"
+def basic_generation(art, adj, con, act, prp, col, sol):
+    excuse  =   f"{choice(art)} {choice(adj)} {choice(con)} {choice(act)} {choice(prp)} {choice(col)}. {choice(sol)}."
     return excuse
 
 articles    =   ["The", "A"]
@@ -55,7 +54,7 @@ concepts    =   [
         "Graphics card", "Chipset", "Expansion slots",
         "Server rack", "Supercomputer", "Microcode",
         "Storage", "Antivirus", "Threat detector",
-        "Infraestructure", "TCP/IP Layer", "Communications protocol"
+        "Infraestructure", "TCP/IP Layer", "Communications protocol",
         "BIOS", "UEFI", "Instruction set",
         "IOT devices"
         ]
@@ -65,10 +64,39 @@ actions   =   [
         "corrupted", "fragmented", "broke down",
         "underflowed", "failed", "overheated",
         "went offline", "disconnected", "was invalidated",
-        "unassigned", "expired", "locked down",
+        "was unassigned", "expired", "locked down",
         "closed", "timed out", "was removed"
+        ]
+
+prepositions    =   [
+        "due to", "because of", "owing to",
+        "on account of"
+        ]
+
+conditional =   [
+        "solar flares", "power outages", "gamma radiation",
+        "a buffer overflow", "poor airflow", "deprecated drivers",
+        "glitches", "undocumented bugs", "clock skew",
+        "insufficient resource allocation", "systemd failures", "race conditions",
+        "hardware failure", "a broken update", "mallicious activity", 
+        "threat actors", "misconfiguration", "layer 8 issues",
+        "PEBKAC errors", "ID-10-t errors", "missing dependencies",
+        "mandatory password rotation", "vendor lock-in", "a kernel panic",
+        "packet loss", "SMART errors", "bad blocks",
+        "lose SATA cables", "UPS failure", "API rate limits",
+        "management intervention", "trashing of the flow of data"
+        ]
+
+solution    =   [
+        "Rotate drivers to previous working version",
+        "Turn it on and off again",
+        "Pull power cable from the wall",
+        "Run sudo rm -rf / --no-preserve-root",
+        "Delete boot partition and try again",
+        "Consult documentation",
+        "Open a ticket with manufacturer"
         ]
 
 #print(len(concepts))
 #print(len(adjectives))
-print(basic_generation(articles, adjectives, concepts, actions))
+print(basic_generation(articles, adjectives, concepts, actions, prepositions, conditional, solution))
