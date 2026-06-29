@@ -1,6 +1,12 @@
-from random import randrange
+#Because all IT workers are assholes, might as well emrbrace it ! 
 
-articles    =   ["The", "A", "An"]
+from random import choice
+
+def basic_generation(art, adj, con, act):
+    excuse  =   f"{choice(art)} {choice(adj)} {choice(con)} {choice(act)}"
+    return excuse
+
+articles    =   ["The", "A"]
 
 adjectives  =   [
         "Distributed", "Virtualized", "Legacy",
@@ -38,8 +44,8 @@ concepts    =   [
         "Modem", "Router", "NFS server",
         "Deamon", "VLAN", "Certificate",
         "Security Policy", "Access token", "Active directory",
-        "Firmware", "Cron job", "Parser"
-        "Git repository", "Microservice", "Dependencies"
+        "Firmware", "Cron job", "Parser",
+        "Git repository", "Microservice", "Dependencies",
         "Endpoints", "HTTP request", "User permissions",
         "User roles", "RBAC", "Priviledge escalation",
         "Authentication", "Authotization", "AI Agent",
@@ -54,7 +60,15 @@ concepts    =   [
         "IOT devices"
         ]
 
-print(len(concepts))
-print(len(adjectives))
+actions   =   [
+        "rebooted", "was reinitialized", "desynchronized",
+        "corrupted", "fragmented", "broke down",
+        "underflowed", "failed", "overheated",
+        "went offline", "disconnected", "was invalidated",
+        "unassigned", "expired", "locked down",
+        "closed", "timed out", "was removed"
+        ]
 
-print(articles[randrange(len(articles))], adjectives[randrange(len(adjectives))], concepts[randrange(len(concepts))])
+#print(len(concepts))
+#print(len(adjectives))
+print(basic_generation(articles, adjectives, concepts, actions))
