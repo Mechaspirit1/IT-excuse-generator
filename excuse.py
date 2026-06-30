@@ -1,11 +1,24 @@
 #Because all IT workers are assholes, might as well emrbrace it ! 
 from random import choice
 
-def basic_generation(art, adj, con, act, prp, col, sol):
-    excuse  =   f"{choice(art)} {choice(adj)} {choice(con)} {choice(act)} {choice(prp)} {choice(col)}. {choice(sol)}."
-    return excuse
+def basic_mode(adj, con, act, prp, col, sol):
+    phrase = f"The {choice(adj)} {choice(con)} {choice(act)} {choice(prp)} {choice(col)}. {choice(sol)}."
+    return phrase
 
-articles    =   ["The", "A"]
+def template_mode(adj, con, act, col, sol):
+    template    =   [
+            f"Due to {choice(col)}, the {choice(adj)} {choice(con)} is experiencing some downtime. I'll warn you when it comes back.",
+            f"The {choice(adj)} {choice(con)} is being updated, until that's over theres nothing i can do.",
+            f"Have you tried to {choice(sol)} ?",
+            f"Ah yes, the {choice(con)} {choice(act)}. We're working on it.",
+            f"{choice(sol)}. That usually works.",
+            f"We have been experiencing some {choice(adj)} {choice(col)}, we're trying to fix it on our end.",
+            f"Maybe your {choice(adj)} {choice(con)} {choice(act)}. Try talking to support.",
+            f"That sounds like a classic case of {choice(adj)} {choice(col)}. Try to {choice(sol)}.",
+            ]
+
+    return choice(template)
+
 
 adjectives  =   [
         "Distributed", "Virtualized", "Legacy",
@@ -48,7 +61,7 @@ concepts    =   [
         "Endpoints", "HTTP request", "User permissions",
         "User roles", "RBAC", "Priviledge escalation",
         "Authentication", "Authotization", "AI Agent",
-        "Agentic", "Machine learning", "Large language model",
+        "Agentic model", "Machine learning model", "Large language model",
         "Neural network", "Generative AI", "Tensor cores",
         "Data center", "Mainframe", "Critical systems",
         "Graphics card", "Chipset", "Expansion slots",
@@ -88,15 +101,20 @@ conditional =   [
         ]
 
 solution    =   [
-        "Rotate drivers to previous working version",
+        "Rotate the drivers to previous working version",
         "Turn it on and off again",
-        "Pull power cable from the wall",
+        "Pull the power cable from the wall",
         "Run sudo rm -rf / --no-preserve-root",
-        "Delete boot partition and try again",
-        "Consult documentation",
-        "Open a ticket with manufacturer"
+        "Delete boot the partition and try again",
+        "Consult the documentation",
+        "Open a ticket with the manufacturer",
+        "Re-install the operating system",
+        "Compile a new kernel",
         ]
 
 #print(len(concepts))
 #print(len(adjectives))
-print(basic_generation(articles, adjectives, concepts, actions, prepositions, conditional, solution))
+def main():
+    print(basic_mode(adjectives, concepts, actions, prepositions, conditional, solution))
+    print(template_mode(adjectives, concepts, actions, conditional, solution))
+main()
