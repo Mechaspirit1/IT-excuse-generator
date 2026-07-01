@@ -19,16 +19,16 @@ def template_mode(adj, con, act, col, sol):
             f"That sounds like a classic case of {choice(adj)} {choice(col)}. Try to {choice(sol)}.",
             f"The {choice(adj)} {choice(con)} is going through some routine maintenance, sorry about that.",
             ]
-
     return choice(template)
 
+#Probably an overly complicated way of doing this but it ensures that every adjective is unique
 def chaos_mode(adj, con, adj_ammount):
     string = ' '
     string_store = ' '
     loop = 0
 
     while True:
-        f_string = ((choice(adj) + ' '))
+        f_string = (choice(adj) + ' ')
         if f_string not in string_store:
             string += f_string
             string_store += f_string
@@ -37,11 +37,32 @@ def chaos_mode(adj, con, adj_ammount):
             continue
         if loop == adj_ammount:
             break
-
     return f"{string}{choice(con)}"
 
 def bofh_mode(adj, con, act, col, sol):
-    return 0
+    templates   =    [
+        f"The {choice(con)} is functioning perfectly. Have you considered that you may be the issue?",
+        f"Your {choice(con)} {choice(act)} after detecting {choice(col)}. This was done for everyone's safety.",
+        f"The {choice(adj)} {choice(con)} is refusing to cooperate with you specifically.",
+        f"I fixed it five minutes ago. Whatever you're seeing now is a brand new problem.",
+        f"The {choice(con)} has entered self-defense mode after detecting excessive user interaction.",
+        f"Your ticket has been marked as 'Works on my machine.'",
+        f"I'm afraid the {choice(con)} has become self-aware and no longer respects management.",
+        f"The issue was escalated, laughed at, and then closed.",
+        f"The {choice(adj)} {choice(con)} has been quarantined until it forgets what you did to it.",
+        f"The problem disappeared the moment I walked over. I'm charging this one to morale.",
+        f"The {choice(con)} is busy processing more important requests.",
+        f"We've determined that replacing the user would be more cost-effective than replacing the hardware.",
+        f"Please stop clicking random buttons. The {choice(con)} is becoming frightened.",
+        f"The {choice(con)} is operating within specification. Your expectations are not.",
+        f"The {choice(adj)} {choice(con)} rebooted out of self-preservation.",
+        f"I could explain the problem, but then I'd have to explain networking.",
+        f"The problem has been isolated. Please stop interacting with it.",
+        f"The {choice(con)} has been promoted to management and no longer performs useful work.",
+        f"Unfortunately, the {choice(con)} has inherited the same configuration strategy as the rest of the department.",
+        f"The {choice(con)} appears to be allergic to your workflow.",
+        ]
+    return choice(templates)
 
 def main():
     adjectives  =   [
@@ -138,17 +159,16 @@ def main():
             "Defrag the disk",
             "Call 1 (800) 328-3425",
             "Disasemble the unit and put it back together",
+            "Escalate issue to a superior"
             ]
-
-    #print(basic_mode(adjectives, concepts, actions, prepositions, conditional, solution))
-    #print(template_mode(adjectives, concepts, actions, conditional, solution))
 
     parser = argparse.ArgumentParser(description="IT excuse generator | \033]8;;https://github.com/Mechaspirit1\033\\A tool by Pablo Loschi (Mechaspirit1)\033]8;;\033\\")
 
     parser.add_argument("-b", "--basic", action="store_true", help="Generates a basic, randomized string of nonsense. Default if no argument is passed")
     parser.add_argument("-t", "--template", action="store_true", help="Chooses from a list of templates and randomizes their contents")
-    parser.add_argument("-c", "--chaos", type=int, metavar="N", choices=range(2, 31), help="Generates a nonsensical tech concpet based on the ammount of adjectives passed as input")
+    parser.add_argument("-c", "--chaos", type=int, metavar="N", choices=range(2, 31), help="Generates a nonsensical tech concpet based on the ammount of adjectives passed as input (2-30)")
     parser.add_argument("-o", "--bofh", action="store_true", help="Chooses from a list of templates written in a manner that resembles classic BOFH (Bastard operator from hell) style excuses")
+    parser.add_argument("-v", "--version", action="store_true", help="Displays version number")
 
     args = parser.parse_args()
     
@@ -158,6 +178,8 @@ def main():
         print(chaos_mode(adjectives, concepts, args.chaos))
     elif args.bofh:
        print(bofh_mode(adjectives, concepts, actions, conditional, solution))
+    elif args.version:
+        print("excuse version 1.0.0 written in python 3.14.6")
     else:
         args = args.basic
         print(basic_mode(adjectives, concepts, actions, prepositions, conditional, solution))
