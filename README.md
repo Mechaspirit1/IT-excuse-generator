@@ -15,7 +15,7 @@ UNIX boxes and Windows NT/Domain services since before i was in diapers.
 # Installation
 Since this one has no external dependencies, installation is pretty straight forward.
 
-```bash 
+``` 
 git clone https://github.com/Mechaspirit1/IT-excuse-generator && cd IT-excuse-generator
 chmod +x excuse.py && mv excuse.py excuse
 sudo mv excuse /usr/local/bin
@@ -25,7 +25,7 @@ Currently there are four available modes of generation, which are detailed in th
 
 Running ```excuse -h``` or ```excuse --help``` outputs the following: 
 
-```bash
+```
 usage: excuse.py [-h] [-b] [-t] [-c N] [-o]
 
 IT excuse generator | A tool by Pablo Loschi (Mechaspirit1)
@@ -41,7 +41,7 @@ options:
 
 Pairs well with ```cowsay```
 
-```bash
+```
 $ excuse -t | cowsay
  _______________________________________
 / Due to poor airflow, the Up-to-date   \
