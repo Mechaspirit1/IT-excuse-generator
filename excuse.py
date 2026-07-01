@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #Because all IT workers are assholes, might as well embrace it !
 import argparse
 from random import choice
@@ -16,12 +17,28 @@ def template_mode(adj, con, act, col, sol):
             f"We have been experiencing some {choice(adj)} {choice(col)}, we're trying to fix it on our end.",
             f"Maybe your {choice(adj)} {choice(con)} {choice(act)}. Try talking to support.",
             f"That sounds like a classic case of {choice(adj)} {choice(col)}. Try to {choice(sol)}.",
+            f"The {choice(adj)} {choice(con)} is going through some routine maintenance, sorry about that.",
             ]
+
     return choice(template)
 
-#todo 
-def corporate_mode(adj, con, act, col, sol):
-    return 0
+def chaos_mode(adj, con, adj_ammount):
+    string = ' '
+    string_store = ' '
+    loop = 0
+
+    while True:
+        f_string = ((choice(adj) + ' '))
+        if f_string not in string_store:
+            string += f_string
+            string_store += f_string
+            loop+=1
+        else:
+            continue
+        if loop == adj_ammount:
+            break
+
+    return f"{string}{choice(con)}"
 
 def bofh_mode(adj, con, act, col, sol):
     return 0
@@ -112,6 +129,7 @@ def main():
             "Turn it on and off again",
             "Pull the power cable from the wall",
             "Run sudo rm -rf / --no-preserve-root",
+            "Run while :; do mkdir x && cd x; done",
             "Delete the boot partition and try again",
             "Consult the documentation",
             "Open a ticket with the manufacturer",
@@ -124,23 +142,25 @@ def main():
 
     #print(basic_mode(adjectives, concepts, actions, prepositions, conditional, solution))
     #print(template_mode(adjectives, concepts, actions, conditional, solution))
+
     parser = argparse.ArgumentParser(description="IT excuse generator | \033]8;;https://github.com/Mechaspirit1\033\\A tool by Pablo Loschi (Mechaspirit1)\033]8;;\033\\")
 
-    parser.add_argument("-b", "--basic", action="store_true", help="Generates a basic, randomized string of nonsense. Default")
+    parser.add_argument("-b", "--basic", action="store_true", help="Generates a basic, randomized string of nonsense. Default if no argument is passed")
     parser.add_argument("-t", "--template", action="store_true", help="Chooses from a list of templates and randomizes their contents")
-    parser.add_argument("-c", "--corporate", action="store_true", help="Chooses from a list of templates written in the manner of corporate jargon")
-    parser.add_argument("-o", "--bofh", action="store_true", help="Chooses from a list of templates written that resemble classic BOFH (Bastard operator from hell) style excuses")
+    parser.add_argument("-c", "--chaos", type=int, metavar="N", choices=range(2, 31), help="Generates a nonsensical tech concpet based on the ammount of adjectives passed as input")
+    parser.add_argument("-o", "--bofh", action="store_true", help="Chooses from a list of templates written in a manner that resembles classic BOFH (Bastard operator from hell) style excuses")
 
     args = parser.parse_args()
-
-    if args.basic:
-        print(basic_mode(adjectives, concepts, actions, prepositions, conditional, solution))
-    elif args.template:
+    
+    if args.template:
         print(template_mode(adjectives, concepts, actions, conditional, solution))
-    elif args.corporate:
-        print(corporate_mode(adjectives, concepts, actions, conditional, solution))
+    elif args.chaos is not None:
+        print(chaos_mode(adjectives, concepts, args.chaos))
     elif args.bofh:
        print(bofh_mode(adjectives, concepts, actions, conditional, solution))
+    else:
+        args = args.basic
+        print(basic_mode(adjectives, concepts, actions, prepositions, conditional, solution))
 
 if __name__ == "__main__":
     main()
